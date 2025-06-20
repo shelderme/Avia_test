@@ -1,0 +1,42 @@
+
+    assert(compareFlightStrings("AFL1", "AFL0001") == true);    // AFL + 1
+    assert(compareFlightStrings("D2 25", "D225") == true);      // D2 + 25
+    assert(compareFlightStrings("D225", "D2025") == true);
+    assert(compareFlightStrings("AB1", "AB001") == true);
+    assert(compareFlightStrings("AB0001", "AB001") == true);
+    assert(compareFlightStrings("XY 123", "XY123") == true);
+
+    // Невалидные случаи
+    assert(compareFlightStrings("A0", "A0") == false); // Недостаточная длина кода
+    assert(compareFlightStrings("123", "123") == true); // Нет кода авиакомпании
+    assert(compareFlightStrings("ABC000", "ABC000") == false);
+    assert(compareFlightStrings("AB0", "AB0") == false); // Номер "0" невалиден
+
+    // Краевые случаи
+    assert(compareFlightStrings("", "") == false);
+    assert(compareFlightStrings("AB", "AB") == false);
+    assert(processFlightNumber("123") == "123");
+    assert(processFlightNumber("0123") == "123");
+    assert(processFlightNumber("001") == "1");
+    assert(processFlightNumber("000") == "invalid");
+    assert(processFlightNumber("0") == "invalid");
+    assert(processFlightNumber("123456") == "invalid");
+    assert(processFlightNumber("12A34") == "invalid");
+    assert(normalizeAirlineCode("AB") == "AB");
+    assert(normalizeAirlineCode("A1") == "A1");
+    assert(normalizeAirlineCode("ABC") == "ABC");
+    assert(normalizeAirlineCode("AB ") == "AB");
+    assert(normalizeAirlineCode("A1 ") == "A1");
+    assert(normalizeAirlineCode("1A") == "1A");
+    assert(normalizeAirlineCode("123") == "");
+    assert(normalizeAirlineCode("ab") == "invalid");
+    assert(normalizeAirlineCode("A") == "");
+    assert(normalizeAirlineCode("") == "");
+    assert(compareFlightStrings("  KL123", "KL123") == false); // Пробелы в начале
+    assert(compareFlightStrings("MN  123", "MN123") == false);
+
+    assert(compareFlightStrings("D5 2431", "D52431") == true);
+    assert(compareFlightStrings("D502431", "D52431") == true);
+    assert(compareFlightStrings("D5 24310", "D524310") == false);
+    assert(compareFlightStrings("D50031", "D531") == true);
+    assert(compareFlightStrings("D5 0031", "D5 31") == true);
