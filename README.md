@@ -18,26 +18,9 @@ compareFlightStrings() — сравнение строк
 
 Потоки: std::thread для параллельной обработки файлов
 
-// Пример ядра логики
-bool compareFlightStrings(const string& a, const string& b) {
-    auto [codeA, numA] = normalizeFlightString(a);
-    auto [codeB, numB] = normalizeFlightString(b);
-    return codeA == codeB && numA == numB;
-}
 
 Решил оставить текущую версию(без ООП), 
 потому что нет сложной state-логики, требующей инкапсуляции
-
-// Черновик класса (не реализовано)
-class FlightData {
-private:
-    string m_code;
-    string m_number;
-public:
-    FlightData(const string& raw);
-    bool operator==(const FlightData& other) const;
-};
-
 
 Сборка через CMake
 Мьютексы или другие синхронизаторы потоков здесь не требуются, потому что:
@@ -48,9 +31,3 @@ public:
 - Отсутствует гонка данных (data race).
 Таким образом, каждый поток работает в своей области ответственности, и между ними отсутствует необходимость координации или защиты ресурсов.
 
-
-Структура файлов
-TestTask
-├── main.cpp            # Основная логика
-├── TestTask.h           # Заголовки функций
-└── TestTask.cpp          # Реализация
